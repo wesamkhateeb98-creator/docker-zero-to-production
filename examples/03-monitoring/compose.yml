@@ -1,0 +1,68 @@
+# Monitoring stack for one Docker host.
+#   docker compose up -d
+#   Grafana:     http://localhost:3000   (admin / admin → change on first login)
+#   Prometheus:  http://localhost:9090
+#   Uptime Kuma: http://localhost:3001
+# All UIs bind to 127.0.0.1 → on a VPS reach them through an SSH tunnel:
+#   ssh -L 3000:localhost:3000 deploy@your-vps
+name: monitoring
+
+x-logging: &logging
+  driver: local
+  options: { max-size: "10m", max-file: "3" }
+
+services:
+  prometheus:
+    image: prom/prometheus:v3.5.0
+    restart: unless-stopped
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.retention.time=15d
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    ports: ["127.0.0.1:9090:9090"]
+    logging: *logging
+
+  grafana:
+    image: grafana/grafana:12.1.0
+    restart: unless-stopped
+    volumes:
+      - ./grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml:ro
+      - grafana_data:/var/lib/grafana
+    ports: ["127.0.0.1:3000:3000"]
+    logging: *logging
+
+  # Per-container CPU / RAM / network / disk
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.52.1
+    restart: unless-stopped
+    privileged: true
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    logging: *logging
+
+  # Whole-host CPU / RAM / disk
+  node-exporter:
+    image: prom/node-exporter:v1.9.1
+    restart: unless-stopped
+    command: ["--path.rootfs=/host"]
+    pid: host
+    volumes: ["/:/host:ro,rslave"]
+    logging: *logging
+
+  # "Is https://api.example.com up?" + alerts (Telegram, email, …)
+  uptime-kuma:
+    image: louislam/uptime-kuma:2
+    restart: unless-stopped
+    volumes: ["kuma_data:/app/data"]
+    ports: ["127.0.0.1:3001:3001"]
+    logging: *logging
+
+volumes:
+  prometheus_data:
+  grafana_data:
+  kuma_data:

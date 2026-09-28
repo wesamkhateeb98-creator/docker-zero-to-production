@@ -1,0 +1,45 @@
+# Local development: docker compose up --build
+name: notes
+
+services:
+  api:
+    build: { context: ., target: runtime }
+    ports: ["8080:8080"]
+    environment:
+      ConnectionStrings__Db: Host=db;Database=notes;Username=notes;Password=dev
+      ConnectionStrings__Redis: redis:6379
+      ASPNETCORE_ENVIRONMENT: Development
+    depends_on:
+      db: { condition: service_healthy }
+      redis: { condition: service_healthy }
+      migrator: { condition: service_completed_successfully }
+
+  migrator:
+    build: { context: ., target: migrator }
+    environment:
+      ConnectionStrings__Db: Host=db;Database=notes;Username=notes;Password=dev
+    depends_on:
+      db: { condition: service_healthy }
+
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: notes
+      POSTGRES_USER: notes
+      POSTGRES_PASSWORD: dev
+    ports: ["127.0.0.1:5432:5432"]     # dev only: GUI tools on the host
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U notes -d notes"]
+      interval: 2s
+      retries: 30
+
+  redis:
+    image: redis:8-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      retries: 30
+
+volumes:
+  pgdata:

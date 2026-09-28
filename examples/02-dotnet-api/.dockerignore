@@ -1,0 +1,16 @@
+**/bin
+**/obj
+**/.vs
+**/.vscode
+**/*.user
+.git
+.github
+.env
+.env.*
+!.env.example
+compose*.yml
+Caddyfile
+*.sh
+Dockerfile*
+README.md
+tests/

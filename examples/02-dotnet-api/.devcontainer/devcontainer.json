@@ -1,0 +1,16 @@
+// Open this folder in VS Code → "Reopen in Container":
+// .NET 10 SDK + dotnet-ef + Docker CLI (talks to the host daemon, so Testcontainers and compose work).
+{
+  "name": "notes-api",
+  "image": "mcr.microsoft.com/devcontainers/dotnet:10.0",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+  },
+  "forwardPorts": [8080],
+  "postCreateCommand": "dotnet tool restore && dotnet restore src/Api",
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-dotnettools.csdevkit", "ms-azuretools.vscode-containers"]
+    }
+  }
+}

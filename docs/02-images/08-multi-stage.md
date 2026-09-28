@@ -40,7 +40,7 @@ ENTRYPOINT ["dotnet", "HelloApi.dll"]
 ## Runtime Image Options (.NET 10) — measured
 | Tag | Size | Shell | `wget` healthcheck | Use when |
 |---|---|---|---|---|
-| `aspnet:10.0` (Debian) | 244 MB | ✅ `bash` | ❌ not installed | Need Debian packages |
+| `aspnet:10.0` (Ubuntu 24.04) | 244 MB | ✅ `bash` | ❌ not installed | Need apt packages |
 | `aspnet:10.0-alpine` | 122 MB | ✅ `sh` | ✅ BusyBox | Default choice here |
 | `aspnet:10.0-noble-chiseled` | 125 MB | ❌ none | ❌ | Max security, health checked from outside |
 

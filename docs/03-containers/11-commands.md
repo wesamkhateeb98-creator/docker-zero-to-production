@@ -48,7 +48,7 @@ docker inspect api -f '{{json .State.Health}}'   # healthcheck history
 ## Which Shell? — measured
 | Image | `bash` | `sh` |
 |---|---|---|
-| `aspnet:10.0` (Debian) | ✅ | ✅ |
+| `aspnet:10.0` (Ubuntu 24.04) | ✅ | ✅ |
 | `aspnet:10.0-alpine` (this repo) | ❌ `executable file not found` | ✅ |
 | `aspnet:10.0-noble-chiseled` | ❌ | ❌ |
 

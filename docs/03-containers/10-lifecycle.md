@@ -32,7 +32,7 @@ docker rm -f api                   # gone (writable layer deleted)
 | ENTRYPOINT | PID 1 | Stop time | Exit |
 |---|---|---|---|
 | `["dotnet","HelloApi.dll"]` | `dotnet` | 1.1 s | 0 ✅ |
-| `dotnet HelloApi.dll` on Debian | `/bin/sh` (ignores SIGTERM) | 10.8 s | 137 ❌ |
+| `dotnet HelloApi.dll` on Ubuntu (`sdk:10.0`) | `/bin/sh` = dash (ignores SIGTERM) | 10.8 s | 137 ❌ |
 | `dotnet HelloApi.dll` on Alpine | `dotnet` (BusyBox `sh` execs it) | 1.0 s | 0 ⚠️ luck |
 
 ## Restart Policies

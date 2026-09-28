@@ -1,0 +1,20 @@
+# syntax=docker/dockerfile:1
+# Multi-arch without emulation: the SDK runs natively ($BUILDPLATFORM) and cross-compiles for $TARGETARCH.
+#   docker buildx build --platform linux/amd64,linux/arm64 -f Dockerfile.multiarch -t hello-dotnet:multi .
+
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0-alpine AS build
+ARG TARGETARCH
+WORKDIR /src
+COPY HelloApi.csproj .
+RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages \
+    dotnet restore -a $TARGETARCH
+COPY . .
+RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages \
+    dotnet publish -c Release -a $TARGETARCH --no-restore -o /app
+
+FROM mcr.microsoft.com/dotnet/aspnet:10.0-alpine AS runtime
+WORKDIR /app
+COPY --from=build --chown=$APP_UID:$APP_UID /app .
+USER $APP_UID
+EXPOSE 8080
+ENTRYPOINT ["dotnet", "HelloApi.dll"]

@@ -1,0 +1,6 @@
+.env
+secrets/*.txt
+deployed.log
+backups/
+probe.log
+probe.stop
