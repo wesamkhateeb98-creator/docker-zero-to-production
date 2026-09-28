@@ -1,0 +1,7 @@
+# ❌ Naive: one stage, SDK in production, root user, no cache ordering
+FROM mcr.microsoft.com/dotnet/sdk:10.0
+WORKDIR /src
+COPY . .
+RUN dotnet publish -c Release -o /app
+WORKDIR /app
+ENTRYPOINT dotnet HelloApi.dll
