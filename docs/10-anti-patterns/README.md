@@ -3,9 +3,16 @@
 > The inverse of [24 Best Practices](../06-production-basics/24-best-practices.md): 25 mistakes, each with the **evidence measured in this repo** (one marked as documented behaviour) and the fix.
 
 ```mermaid
-flowchart LR
-    A["49 Dockerfile<br/>#1–5"] --> B["50 Runtime<br/>#6–10"] --> C["51 Data<br/>#11–15"]
-    C --> D["52 Network & Security<br/>#16–20"] --> E["53 Deploy & CI<br/>#21–25"]
+flowchart TB
+    subgraph B["Build & run"]
+        direction LR
+        A1["49 Dockerfile<br/>#1–5"] --> A2["50 Runtime<br/>#6–10"] --> A3["51 Data<br/>#11–15"]
+    end
+    subgraph S["Expose & ship"]
+        direction LR
+        A4["52 Network & Security<br/>#16–20"] --> A5["53 Deploy & CI<br/>#21–25"]
+    end
+    B --> S
 ```
 
 ## All 25 at a Glance

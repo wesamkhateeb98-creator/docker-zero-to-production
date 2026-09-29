@@ -3,9 +3,16 @@
 > The whole path, end to end, using [examples/02-dotnet-api](../../examples/02-dotnet-api) — rehearsed locally with the same files.
 
 ```mermaid
-flowchart LR
-    A["42 VPS Setup"] --> B["43 Dockerfile"] --> C["44 compose.prod.yml"]
-    C --> D["45 EF Migrations"] --> E["46 CI/CD"] --> F["47 Rollback"] --> G["48 Checklist"]
+flowchart TB
+    subgraph P1["Prepare"]
+        direction LR
+        A["42 VPS Setup"] --> B["43 Dockerfile"] --> C["44 compose.prod.yml"]
+    end
+    subgraph P2["Ship"]
+        direction LR
+        D["45 EF Migrations"] --> E["46 CI/CD"] --> F["47 Rollback"]
+    end
+    P1 --> P2 --> G["48 Checklist ✅"]
 ```
 
 | # | Idea | One line | File |

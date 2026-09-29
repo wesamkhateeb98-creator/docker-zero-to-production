@@ -3,11 +3,16 @@
 > Build small, fast, cache-friendly images.
 
 ```mermaid
-flowchart LR
-    A["05 Image vs Container"] --> B["06 Dockerfile"]
-    B --> C["07 Layers & Cache"]
-    C --> D["08 Multi-stage"]
-    D --> E["09 .dockerignore"]
+flowchart TB
+    subgraph U["Understand"]
+        direction LR
+        A["05 Image vs Container"] --> B["06 Dockerfile"]
+    end
+    subgraph O["Optimize"]
+        direction LR
+        C["07 Layers & Cache"] --> D["08 Multi-stage"] --> E["09 .dockerignore"]
+    end
+    U --> O
 ```
 
 | # | Idea | One line | File |

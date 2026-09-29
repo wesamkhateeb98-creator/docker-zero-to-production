@@ -3,10 +3,20 @@
 > Everything between "it runs on my laptop" and "it runs reliably on a server".
 
 ```mermaid
-flowchart LR
-    A["25 Dev vs Prod"] --> B["26 Secrets"] --> C["27 Reverse Proxy"]
-    C --> D["28 Restart & Health"] --> E["29 Zero-downtime"]
-    E --> F["30 Logging"] --> G["31 Monitoring"] --> H["32 Backups"] --> I["33 Scaling Path"]
+flowchart TB
+    subgraph C1["Configure"]
+        direction LR
+        A["25 Dev vs Prod"] --> B["26 Secrets"] --> C["27 Reverse Proxy"]
+    end
+    subgraph C2["Keep it running"]
+        direction LR
+        D["28 Restart & Health"] --> E["29 Zero-downtime"] --> F["30 Logging"]
+    end
+    subgraph C3["Protect & grow"]
+        direction LR
+        G["31 Monitoring"] --> H["32 Backups"] --> I["33 Scaling Path"]
+    end
+    C1 --> C2 --> C3
 ```
 
 | # | Idea | One line | File |
