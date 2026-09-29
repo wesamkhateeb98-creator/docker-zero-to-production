@@ -7,17 +7,17 @@ Manual deploys drift ("which tag is live?"), skip scans, and happen from laptops
 
 ```mermaid
 sequenceDiagram
-    participant D as Developer
-    participant G as GitHub Actions
-    participant R as ghcr.io
-    participant V as VPS (~/notes)
-    D->>G: push main (commit 3f2a1bc)
-    G->>G: build runtime + migrator (gha cache)
-    G->>G: trivy CRITICAL → fail?
-    G->>R: push notes-api:sha-3f2a1bc, notes-migrator:sha-3f2a1bc
-    G->>V: ssh ./rollout.sh sha-3f2a1bc
+    participant D as Dev
+    participant G as Actions
+    participant R as GHCR
+    participant V as VPS
+    D->>G: push main
+    G->>G: build (cached)
+    G->>G: trivy: CRITICAL? fail
+    G->>R: push sha-3f2a1bc
+    G->>V: ssh rollout.sh
     V->>R: pull
-    V->>V: migrator → scale 2 → remove old
+    V->>V: migrate, swap old→new
     V-->>G: ✅ rolled out
 ```
 

@@ -6,7 +6,7 @@
 v2 is live and returns errors; you need v1 back in seconds, without guessing what "previous" was.
 
 ```mermaid
-flowchart LR
+flowchart TB
     L["deployed.log<br/>…v1<br/>…v2 ← now"] -->|"second-to-last line"| T["TAG=v1"]
     T --> R["rollout.sh v1<br/>(old + new → old)"]
     R --> OK["v1 live, 0 failed requests"]

@@ -3,7 +3,7 @@
 > The container runs — but with more power, less protection, and less self-healing than you think.
 
 ```mermaid
-flowchart TD
+flowchart LR
     A6["#6 root"] --> R["Bigger blast radius"]
     A7["#7 no limits"] --> H["Host starves"]
     A8["#8 trust healthy"] --> Z["Zombie serving 500s"]

@@ -7,17 +7,17 @@ A full VM per app wastes GBs of RAM/disk and takes a minute to boot.
 
 ```mermaid
 flowchart TB
-    subgraph VM["Virtual Machines"]
-        A1["App A"] --> G1["Guest OS + kernel"]
-        A2["App B"] --> G2["Guest OS + kernel"]
-        G1 --> H["Hypervisor"]
-        G2 --> H
+    subgraph VM["VMs — each app brings a whole OS"]
+        direction LR
+        A1["App A"] --> G1["Guest OS"] --> H["Hypervisor"]
+        A2["App B"] --> G2["Guest OS"] --> H
     end
-    subgraph CT["Containers"]
-        C1["App A process"] --> K["Host kernel (shared)"]
+    subgraph CT["Containers — apps share the host kernel"]
+        direction LR
+        C1["App A process"] --> K["Host kernel"]
         C2["App B process"] --> K
-        E["Docker Engine"] -.->|"creates + isolates"| C1
     end
+    VM ~~~ CT
 ```
 
 ## Example

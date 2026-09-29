@@ -6,11 +6,16 @@
 A compromised app inherits everything the container has: root, a shell, compilers, write access, Linux capabilities.
 
 ```mermaid
-flowchart LR
-    I["Image<br/>small base, scanned"] --> U["User<br/>non-root"]
-    U --> F["Filesystem<br/>read-only"]
-    F --> C["Capabilities<br/>drop ALL"]
-    C --> N["Network<br/>no public DB"]
+flowchart TB
+    subgraph L1["Build time"]
+        direction LR
+        I["Image<br/>small base, scanned"] --> U["User<br/>non-root"]
+    end
+    subgraph L2["Run time"]
+        direction LR
+        F["Filesystem<br/>read-only"] --> C["Capabilities<br/>drop ALL"] --> N["Network<br/>no public DB"]
+    end
+    L1 --> L2
 ```
 
 ## CVEs by Base Image — measured with Trivy, 2026-09-28

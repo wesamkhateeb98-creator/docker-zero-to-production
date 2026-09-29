@@ -6,7 +6,7 @@
 A chatty service fills the VPS disk; then Postgres can't write and everything stops.
 
 ```mermaid
-flowchart LR
+flowchart TB
     A["app → stdout"] --> D["log driver"]
     D -->|"json-file (default)"| J["grows forever ❌"]
     D -->|"local, max-size"| L["rotated + compressed ✅"]

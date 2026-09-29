@@ -6,7 +6,7 @@
 Env vars show up in `docker inspect`; build args show up in `docker history` — forever, in every copy of the image.
 
 ```mermaid
-flowchart LR
+flowchart TB
     F["secrets/db_connection.txt<br/>(server only, never in git)"] -->|"compose secrets:"| S["/run/secrets/ConnectionStrings__Db"]
     S -->|"AddKeyPerFile"| C[".NET config key<br/>ConnectionStrings:Db"]
 ```

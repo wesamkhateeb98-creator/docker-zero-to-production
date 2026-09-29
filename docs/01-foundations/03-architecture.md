@@ -7,17 +7,15 @@ Without the mental model, errors like `Cannot connect to the Docker daemon` make
 
 ```mermaid
 sequenceDiagram
-    participant CLI as docker CLI
+    participant CLI as docker
     participant D as dockerd
     participant C as containerd
-    participant S as shim
-    participant RC as runc
-    CLI->>D: POST /containers/create (docker.sock)
-    D->>C: pull image if missing, create, start
-    C->>S: one shim per container
-    S->>RC: runc create
-    RC->>RC: namespaces + cgroups, exec app
-    RC-->>S: runc exits, shim stays as app parent
+    participant R as shim + runc
+    CLI->>D: run (REST, docker.sock)
+    D->>C: pull + create
+    C->>R: 1 shim per container
+    R->>R: runc: namespaces, cgroups
+    R-->>C: runc exits, shim keeps app alive
 ```
 
 ## Kernel Building Blocks

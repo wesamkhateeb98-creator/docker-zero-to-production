@@ -6,12 +6,16 @@
 `docker --help` lists 60+ commands; you need the few that matter.
 
 ```mermaid
-flowchart LR
-    P["pull / build"] --> R["run"]
-    R --> O["ps / logs / stats"]
-    O --> X["exec / inspect / cp"]
-    X --> S["stop / rm"]
-    S --> C["system prune"]
+flowchart TB
+    subgraph S1["Start & watch"]
+        direction LR
+        P["pull / build"] --> R["run"] --> O["ps / logs / stats"]
+    end
+    subgraph S2["Dig in & clean up"]
+        direction LR
+        X["exec / inspect / cp"] --> S["stop / rm"] --> C["system prune"]
+    end
+    S1 --> S2
 ```
 
 ## Cheatsheet
