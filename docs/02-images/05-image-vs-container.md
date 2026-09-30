@@ -52,4 +52,4 @@ docker exec api-2 ls /tmp/x
 ❌ `docker exec` to patch prod code → ✅ Change code, rebuild, redeploy (the patch dies with the container)
 
 ---
-← [Phase 1](../01-foundations/README.md) · [Next → 06 Dockerfile](06-dockerfile.md)
+← [04 Install & Hello World](../01-foundations/04-install.md) · [Next → 06 Dockerfile](06-dockerfile.md)

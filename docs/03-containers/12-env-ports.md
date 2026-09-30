@@ -58,7 +58,7 @@ curl localhost:5000
 
 ❌ `-p 5432:5432` on a VPS with ufw → ✅ Docker bypasses ufw; bind `127.0.0.1:` or don't publish
 
-❌ `-e DB_PASSWORD=…` → ✅ Visible in `docker inspect`; use secrets (Phase 7)
+❌ `-e DB_PASSWORD=…` → ✅ Visible in `docker inspect`; use secret files ([32](../07-dotnet-vps/32-compose-prod.md))
 
 ---
-← [11 Commands](11-commands.md) · [Next → 13 Resource Limits](13-limits.md)
+← [11 Essential Commands](11-commands.md) · [Next → 13 Resource Limits](13-limits.md)

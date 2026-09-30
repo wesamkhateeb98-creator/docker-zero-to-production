@@ -20,4 +20,4 @@ flowchart LR
 **Example:** [examples/01-hello-dotnet](../../examples/01-hello-dotnet)
 
 ---
-← [Phase 2](../02-images/README.md) · [Next phase → 04 Data & Network](../04-data-network/README.md)
+← [Phase 2 — Images](../02-images/README.md) · [Next phase → 4 Data & Network](../04-data-network/README.md)

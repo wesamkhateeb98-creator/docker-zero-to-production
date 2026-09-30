@@ -53,4 +53,4 @@ curl --unix-socket /var/run/docker.sock http://localhost/version
 ❌ Mount `/var/run/docker.sock` into untrusted containers → ✅ The socket = **root access** to the host
 
 ---
-← [02 VM vs Container](02-vm-vs-container.md) · [Next → 04 Install](04-install.md)
+← [02 VM vs Container](02-vm-vs-container.md) · [Next → 04 Install & Hello World](04-install.md)

@@ -68,4 +68,4 @@ deploy:
 ❌ Limit = average usage → ✅ Limit ≈ peak × 1.5; watch `docker stats` first
 
 ---
-← [12 ENV & Ports](12-env-ports.md) · [Next phase → 04 Data & Network](../04-data-network/README.md)
+← [12 Environment Variables & Ports](12-env-ports.md) · [Next → 14 Volumes](../04-data-network/14-volumes.md)

@@ -49,7 +49,7 @@ docker exec db pg_dump -U postgres postgres | gzip > db-$(date +%F).sql.gz
 - Volume outlives the container
 - `docker rm -v` / `down -v` delete volumes
 - Dump databases, don't tar them
-- Full backups → [32](../07-deployment/32-backups.md)
+- Daily backups → [backup.sh](../../examples/02-dotnet-api/backup.sh)
 
 ## Pitfall
 ❌ `docker run postgres` without `-v` → ✅ Image declares `VOLUME` → 2 runs left **2 anonymous volumes, 80 MB** behind; always name it
@@ -57,4 +57,4 @@ docker exec db pg_dump -U postgres postgres | gzip > db-$(date +%F).sql.gz
 ❌ Non-root app writes to a new volume path → ✅ `Permission denied` (dir owned by root); in Dockerfile: `RUN mkdir -p /app/data && chown $APP_UID /app/data` → `WRITE_OK`
 
 ---
-← [Phase 3](../03-containers/README.md) · [Next → 15 Bind Mounts](15-bind-mounts.md)
+← [13 Resource Limits](../03-containers/13-limits.md) · [Next → 15 Bind Mounts](15-bind-mounts.md)

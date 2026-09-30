@@ -27,4 +27,4 @@ flowchart TB
 **Example:** [examples/01-hello-dotnet](../../examples/01-hello-dotnet)
 
 ---
-← [Phase 1](../01-foundations/README.md) · [Next phase → 03 Containers](../03-containers/README.md)
+← [Phase 1 — Foundations](../01-foundations/README.md) · [Next phase → 3 Containers](../03-containers/README.md)

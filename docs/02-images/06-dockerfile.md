@@ -65,4 +65,4 @@ It works — but every line has a cost, fixed in the next files:
 ❌ `COPY . .  # copy source` → ✅ `#` is a comment **only at line start**; mid-line it becomes an argument
 
 ---
-← [05 Image vs Container](05-image-vs-container.md) · [Next → 07 Layers & Cache](07-layers-cache.md)
+← [05 Image vs Container](05-image-vs-container.md) · [Next → 07 Layers & Build Cache](07-layers-cache.md)

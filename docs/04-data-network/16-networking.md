@@ -35,7 +35,7 @@ docker inspect api -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'
 | User-defined bridge | Same + **DNS by name** | ✅ Default choice |
 | `host` | Shares host stack, no isolation | Linux perf edge cases |
 | `none` | Only `lo` (measured: `127.0.0.1`, `::1`) | Batch jobs, max isolation |
-| `overlay` | Spans many hosts | Swarm ([33](../07-deployment/33-scaling-path.md)) |
+| `overlay` | Spans many hosts | Docker Swarm |
 
 ## Isolation — measured
 | From | To `api` on `backend` | Result |

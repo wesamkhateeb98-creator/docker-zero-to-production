@@ -3,7 +3,7 @@
 > Learn Docker visually: one idea per file, diagram first, runnable .NET examples, **measured** numbers.
 > Ends with a .NET API on a VPS with zero-downtime deploys — plus 25 anti-patterns to avoid.
 
-**Docker 29 · .NET 10 · Alpine · Postgres 17 · Redis 8 · Caddy 2 · Compose v2** — 10 phases · 53 docs · 3 runnable examples
+**Docker 29 · .NET 10 · Alpine · Postgres 17 · Redis 8 · Caddy 2 · Compose v2** — 8 phases · 42 docs · 2 runnable examples
 
 ---
 
@@ -17,15 +17,15 @@ flowchart TB
     end
     subgraph B["② Build real apps"]
         direction LR
-        P4["4 Data & Network"] --> P5["5 Compose"] --> P6["6 Prod Basics"]
+        P4["4 Data & Network"] --> P5["5 Compose"]
     end
     subgraph S["③ Ship to production"]
         direction LR
-        P7["7 Deployment"] --> P8["8 Modern Tools"] --> P9["9 .NET → VPS 🎯"]
+        P6["6 Modern Tools"] --> P7["7 .NET → VPS 🎯"]
     end
-    L --> B --> S --> P10["10 · 25 Anti-patterns"]
+    L --> B --> S --> P8["8 · 25 Anti-patterns"]
     classDef goal fill:#fef3c7,stroke:#d97706,color:#78350f
-    class P9 goal
+    class P7 goal
 ```
 
 | Phase | You'll be able to… | Docs |
@@ -34,12 +34,10 @@ flowchart TB
 | [2 Images](docs/02-images/README.md) | Write a small, cached, multi-stage Dockerfile | 05–09 |
 | [3 Containers](docs/03-containers/README.md) | Run, inspect, configure, and limit containers | 10–13 |
 | [4 Data & Network](docs/04-data-network/README.md) | Keep data safe, connect containers by name | 14–17 |
-| [5 Compose](docs/05-compose/README.md) | Run API + Postgres + Redis with one command | 18–20 |
-| [6 Prod Basics](docs/06-production-basics/README.md) | Tag, secure, and debug images | 21–24 |
-| [7 Deployment](docs/07-deployment/README.md) | HTTPS, secrets, zero-downtime, logs, backups | 25–33 |
-| [8 Modern Tools](docs/08-modern-tools/README.md) | Pick the right tool: buildx, CI, Trivy, Kamal… | 34–41 |
-| [9 .NET → VPS](docs/09-dotnet-vps/README.md) 🎯 | Ship a .NET API to a VPS with CI/CD + rollback | 42–48 |
-| [10 Anti-patterns](docs/10-anti-patterns/README.md) | Spot 25 common mistakes in any project | 49–53 |
+| [5 Compose](docs/05-compose/README.md) | Run a full stack with one command — and write the file **well** | 18–25 |
+| [6 Modern Tools](docs/06-modern-tools/README.md) | Use the one best tool per job: CI, HTTPS, scanning, tests | 26–29 |
+| [7 .NET → VPS](docs/07-dotnet-vps/README.md) 🎯 | Ship a .NET API with CI/CD, zero downtime, rollback | 30–37 |
+| [8 Anti-patterns](docs/08-anti-patterns/README.md) | Spot 25 common mistakes in any project | 38–42 |
 
 ---
 
@@ -54,9 +52,9 @@ flowchart TB
 | Shell-form `ENTRYPOINT` | Stop **10.8 s, exit 137** vs 1.1 s, exit 0 | [10](docs/03-containers/10-lifecycle.md) |
 | .NET memory leak at the limit | 500 errors, container still **"healthy"** | [13](docs/03-containers/13-limits.md) |
 | Postgres without a volume | Data gone + **80 MB** orphan volumes | [14](docs/04-data-network/14-volumes.md) |
-| `compose up -d` redeploy | **17.4 s outage** → `rollout.sh`: **0** failed | [29](docs/07-deployment/29-zero-downtime.md) |
-| Default logging, 400k lines | **44 MB** → rotated `local`: 480 KB | [30](docs/07-deployment/30-logging.md) |
-| Unhealthy + restart policy | Restarted **0 times** | [28](docs/07-deployment/28-restart-health.md) |
+| `$VAR` in a healthcheck | Compose substitutes **your** env → `pg_isready -U` (empty) | [22](docs/05-compose/22-healthcheck-recipes.md) |
+| `compose up -d` redeploy | **17.4 s outage** → `rollout.sh`: **0** failed | [35](docs/07-dotnet-vps/35-zero-downtime.md) |
+| Unhealthy + restart policy | Restarted **0 times** | [39](docs/08-anti-patterns/39-runtime.md) |
 
 ---
 
@@ -74,7 +72,7 @@ docker compose down                 # add -v to also delete the data
 
 ---
 
-## 📚 All 53 Docs
+## 📚 All 42 Docs
 
 <details>
 <summary><b>1 · Foundations</b> — 01–04</summary>
@@ -126,86 +124,59 @@ docker compose down                 # add -v to also delete the data
 </details>
 
 <details>
-<summary><b>5 · Compose</b> — 18–20</summary>
+<summary><b>5 · Compose</b> — 18–25</summary>
 
 | # | Doc | One line |
 |---|---|---|
 | 18 | [Compose Basics](docs/05-compose/18-compose-basics.md) | One file, ten commands |
-| 19 | [Multi-service App](docs/05-compose/19-multi-service-app.md) | API + Postgres + Redis + migrator |
-| 20 | [Healthchecks & depends_on](docs/05-compose/20-healthchecks-depends-on.md) | Start in the right order |
+| 19 | [Anatomy](docs/05-compose/19-compose-anatomy.md) | 5 top-level blocks, 8 questions per service |
+| 20 | [Multi-service App](docs/05-compose/20-multi-service-app.md) | API + Postgres + Redis + migrator |
+| 21 | [Healthchecks & depends_on](docs/05-compose/21-healthchecks-depends-on.md) | Who checks, who waits, in what order |
+| 22 | [Healthcheck Recipes](docs/05-compose/22-healthcheck-recipes.md) | Copy-paste checks, `$` vs `$$`, timing math |
+| 23 | [Style Guide](docs/05-compose/23-compose-style-guide.md) | 15 rules, each linked to evidence |
+| 24 | [Before → After](docs/05-compose/24-compose-refactor.md) | 15 lines, 10 problems, 10 fixes |
+| 25 | [Dev Workflow](docs/05-compose/25-compose-dev-workflow.md) | Override, profiles, `watch` |
 
 </details>
 
 <details>
-<summary><b>6 · Production Basics</b> — 21–24</summary>
+<summary><b>6 · Modern Tools</b> — 26–29</summary>
 
 | # | Doc | One line |
 |---|---|---|
-| 21 | [Registry & Tags](docs/06-production-basics/21-registry-tags.md) | Tag by commit, pin by digest |
-| 22 | [Security](docs/06-production-basics/22-security.md) | Non-root, read-only, scanned |
-| 23 | [Debugging](docs/06-production-basics/23-debugging.md) | Symptom → cause in 5 commands |
-| 24 | [Best Practices](docs/06-production-basics/24-best-practices.md) | One-page checklist |
+| 26 | [GitHub Actions + GHCR](docs/06-modern-tools/26-github-actions-ghcr.md) | Build, scan, push, deploy |
+| 27 | [Caddy](docs/06-modern-tools/27-caddy.md) | HTTPS + reverse proxy in 5 lines |
+| 28 | [Trivy](docs/06-modern-tools/28-trivy.md) | CVE scans that fail the build |
+| 29 | [Testcontainers](docs/06-modern-tools/29-testcontainers.md) | Real Postgres in integration tests |
 
 </details>
 
 <details>
-<summary><b>7 · Deployment</b> — 25–33</summary>
+<summary><b>7 · .NET → VPS</b> 🎯 — 30–37</summary>
 
 | # | Doc | One line |
 |---|---|---|
-| 25 | [Dev vs Prod](docs/07-deployment/25-dev-vs-prod.md) | Two Compose files, two jobs |
-| 26 | [Secrets](docs/07-deployment/26-secrets.md) | Files in `/run/secrets` |
-| 27 | [Reverse Proxy](docs/07-deployment/27-reverse-proxy.md) | Caddy: HTTPS in 5 lines |
-| 28 | [Restart & Health](docs/07-deployment/28-restart-health.md) | "Unhealthy" isn't restarted |
-| 29 | [Zero-downtime](docs/07-deployment/29-zero-downtime.md) | 17.4 s → 0 s |
-| 30 | [Logging](docs/07-deployment/30-logging.md) | Rotate or fill the disk |
-| 31 | [Monitoring](docs/07-deployment/31-monitoring.md) | Prometheus + Grafana + Kuma |
-| 32 | [Backups](docs/07-deployment/32-backups.md) | Dump, ship off-site, test restore |
-| 33 | [Scaling Path](docs/07-deployment/33-scaling-path.md) | Compose → Swarm → Kubernetes |
+| 30 | [VPS Setup](docs/07-dotnet-vps/30-vps-setup.md) | SSH, firewall, Docker, daemon.json |
+| 31 | [.NET Dockerfile](docs/07-dotnet-vps/31-dotnet-dockerfile.md) | `runtime` + `migrator` targets |
+| 32 | [compose.prod.yml](docs/07-dotnet-vps/32-compose-prod.md) | Every production line, incl. secrets |
+| 33 | [EF Migrations](docs/07-dotnet-vps/33-ef-migrations.md) | Bundle as a one-shot job |
+| 34 | [CI/CD](docs/07-dotnet-vps/34-cicd.md) | Push → GHCR → rollout |
+| 35 | [Zero-downtime](docs/07-dotnet-vps/35-zero-downtime.md) | 17.4 s outage → 0 s |
+| 36 | [Rollback](docs/07-dotnet-vps/36-rollback.md) | Previous SHA, zero downtime |
+| 37 | [Checklist](docs/07-dotnet-vps/37-checklist.md) | 20 checks before go-live |
 
 </details>
 
 <details>
-<summary><b>8 · Modern Tools</b> — 34–41</summary>
-
-| # | Doc | One line |
-|---|---|---|
-| 34 | [buildx](docs/08-modern-tools/34-buildx.md) | One tag for amd64 + arm64 |
-| 35 | [GHCR + Actions](docs/08-modern-tools/35-ghcr-actions.md) | Build, scan, push, deploy |
-| 36 | [Traefik vs Caddy vs Nginx](docs/08-modern-tools/36-proxies.md) | Same routing, three configs |
-| 37 | [Coolify / Dokploy / Kamal](docs/08-modern-tools/37-self-hosted-paas.md) | Heroku on your VPS |
-| 38 | [Trivy / Scout](docs/08-modern-tools/38-image-scanning.md) | CVE scans that fail the build |
-| 39 | [Portainer](docs/08-modern-tools/39-portainer.md) | Web UI for containers |
-| 40 | [Dev Containers & Testcontainers](docs/08-modern-tools/40-dev-test.md) | Same toolchain; real DB in tests |
-| 41 | [Podman](docs/08-modern-tools/41-podman.md) | Daemonless, rootless alternative |
-
-</details>
-
-<details>
-<summary><b>9 · .NET → VPS</b> 🎯 — 42–48</summary>
-
-| # | Doc | One line |
-|---|---|---|
-| 42 | [VPS Setup](docs/09-dotnet-vps/42-vps-setup.md) | SSH, firewall, Docker, daemon.json |
-| 43 | [.NET Dockerfile](docs/09-dotnet-vps/43-dotnet-dockerfile.md) | `runtime` + `migrator` targets |
-| 44 | [compose.prod.yml](docs/09-dotnet-vps/44-compose-prod.md) | Every production line explained |
-| 45 | [EF Migrations](docs/09-dotnet-vps/45-ef-migrations.md) | Bundle as a one-shot job |
-| 46 | [CI/CD](docs/09-dotnet-vps/46-cicd.md) | Push → GHCR → rollout |
-| 47 | [Rollback](docs/09-dotnet-vps/47-rollback.md) | Previous SHA, zero downtime |
-| 48 | [Checklist](docs/09-dotnet-vps/48-checklist.md) | 20 checks before go-live |
-
-</details>
-
-<details>
-<summary><b>10 · Anti-patterns</b> — 49–53</summary>
+<summary><b>8 · Anti-patterns</b> — 38–42</summary>
 
 | # | Doc | Covers |
 |---|---|---|
-| 49 | [Dockerfile](docs/10-anti-patterns/49-dockerfile.md) | #1–5 |
-| 50 | [Runtime](docs/10-anti-patterns/50-runtime.md) | #6–10 |
-| 51 | [Data](docs/10-anti-patterns/51-data.md) | #11–15 |
-| 52 | [Network & Security](docs/10-anti-patterns/52-network-security.md) | #16–20 |
-| 53 | [Deploy & CI](docs/10-anti-patterns/53-deploy-ci.md) | #21–25 |
+| 38 | [Dockerfile](docs/08-anti-patterns/38-dockerfile.md) | #1–5 |
+| 39 | [Runtime](docs/08-anti-patterns/39-runtime.md) | #6–10 |
+| 40 | [Data](docs/08-anti-patterns/40-data.md) | #11–15 |
+| 41 | [Network & Security](docs/08-anti-patterns/41-network-security.md) | #16–20 |
+| 42 | [Deploy & CI](docs/08-anti-patterns/42-deploy-ci.md) | #21–25 |
 
 </details>
 
@@ -215,9 +186,8 @@ docker compose down                 # add -v to also delete the data
 
 | Folder | What's inside | Used in |
 |---|---|---|
-| [01-hello-dotnet](examples/01-hello-dotnet) | Minimal API + naive / multi-stage / multi-arch Dockerfiles | 05–17, 34 |
-| [02-dotnet-api](examples/02-dotnet-api) | Notes API (EF Core, Postgres, Redis), dev + prod Compose, Caddy, deploy scripts, CI, tests | 18–53 |
-| [03-monitoring](examples/03-monitoring) | Prometheus, Grafana, cAdvisor, node-exporter, Uptime Kuma | 31 |
+| [01-hello-dotnet](examples/01-hello-dotnet) | Minimal API + naive vs multi-stage Dockerfiles | 05–17 |
+| [02-dotnet-api](examples/02-dotnet-api) | Notes API (EF Core, Postgres, Redis), dev + prod Compose, Caddy, deploy scripts, CI, tests | 18–42 |
 
 ---
 
@@ -240,4 +210,4 @@ flowchart TB
 |---|---|
 | **measured** | Run on Docker Desktop 29 (Windows, 4 CPUs, 7.7 GiB) — your numbers differ, ratios hold |
 | **typical** | Common range, not measured here |
-| **validated** | Config checked (`compose config`, `promtool`, `actionlint`), not run long-term |
+| **validated** | Config checked (`compose config`, `actionlint`), not run long-term |

@@ -19,4 +19,4 @@ flowchart LR
 **Prerequisites:** [Phase 3 — Containers](../03-containers/README.md)
 
 ---
-← [Phase 3](../03-containers/README.md) · [Next phase → 05 Compose](../05-compose/README.md)
+← [Phase 3 — Containers](../03-containers/README.md) · [Next phase → 5 Compose](../05-compose/README.md)

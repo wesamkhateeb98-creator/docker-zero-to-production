@@ -66,4 +66,4 @@ docker info --format '{{.OperatingSystem}} | {{.NCPU}} CPUs | {{.MemTotal}}'
 ❌ `docker-compose` (v1, retired) → ✅ `docker compose`
 
 ---
-← [03 Architecture](03-architecture.md) · [Next phase → 02 Images](../02-images/README.md)
+← [03 Docker Architecture](03-architecture.md) · [Next → 05 Image vs Container](../02-images/05-image-vs-container.md)

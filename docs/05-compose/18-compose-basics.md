@@ -70,4 +70,4 @@ volumes:
 ❌ `version: "3.8"` at the top → ✅ Obsolete; Compose v2 ignores it and warns — delete it
 
 ---
-← [Phase 4](../04-data-network/README.md) · [Next → 19 Multi-service App](19-multi-service-app.md)
+← [17 Container DNS](../04-data-network/17-dns.md) · [Next → 19 Anatomy of a Compose File](19-compose-anatomy.md)

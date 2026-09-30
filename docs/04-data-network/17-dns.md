@@ -54,4 +54,4 @@ docker run --add-host=host.docker.internal:host-gateway …
 ❌ `Host=localhost` in the connection string → ✅ `Host=db` (the service/container name)
 
 ---
-← [16 Networking](16-networking.md) · [Next phase → 05 Compose](../05-compose/README.md)
+← [16 Networking](16-networking.md) · [Next → 18 Compose Basics](../05-compose/18-compose-basics.md)

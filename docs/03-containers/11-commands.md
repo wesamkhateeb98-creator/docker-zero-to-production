@@ -72,4 +72,4 @@ docker run --rm -it --pid=container:api --network=container:api nicolaka/netshoo
 ❌ `docker system prune -a --volumes` on prod → ✅ Plain `prune`; `--volumes` deletes unused **data**
 
 ---
-← [10 Lifecycle](10-lifecycle.md) · [Next → 12 ENV & Ports](12-env-ports.md)
+← [10 Container Lifecycle](10-lifecycle.md) · [Next → 12 Environment Variables & Ports](12-env-ports.md)

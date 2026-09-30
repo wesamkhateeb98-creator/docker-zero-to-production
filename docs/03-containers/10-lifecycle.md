@@ -65,4 +65,4 @@ docker inspect api --format '{{.State.ExitCode}} OOM={{.State.OOMKilled}} restar
 ❌ Long requests cut at shutdown → ✅ .NET waits up to 30 s (`ShutdownTimeout`); give Docker ≥ that: `docker stop -t 30` / Compose `stop_grace_period: 30s`
 
 ---
-← [Phase 2](../02-images/README.md) · [Next → 11 Commands](11-commands.md)
+← [09 .dockerignore](../02-images/09-dockerignore.md) · [Next → 11 Essential Commands](11-commands.md)

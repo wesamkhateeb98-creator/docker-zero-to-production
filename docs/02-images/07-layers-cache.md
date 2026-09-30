@@ -64,10 +64,10 @@ RUN --mount=type=cache,id=nuget,target=/root/.nuget/packages \
 - Stable on top, volatile below
 - One change invalidates everything below
 - Cache mounts survive `.csproj` changes
-- CI runners start empty → `--cache-from` (Phase 8)
+- CI runners start empty → `cache-from: type=gha` ([26](../06-modern-tools/26-github-actions-ghcr.md))
 
 ## Pitfall
 ❌ `RUN apt-get update` and `RUN apt-get install` as two lines → ✅ One `RUN`; otherwise a cached, stale package index is reused
 
 ---
-← [06 Dockerfile](06-dockerfile.md) · [Next → 08 Multi-stage](08-multi-stage.md)
+← [06 Dockerfile](06-dockerfile.md) · [Next → 08 Multi-stage Builds](08-multi-stage.md)

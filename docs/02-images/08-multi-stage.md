@@ -44,7 +44,7 @@ ENTRYPOINT ["dotnet", "HelloApi.dll"]
 | `aspnet:10.0-alpine` | 122 MB | ✅ `sh` | ✅ BusyBox | Default choice here |
 | `aspnet:10.0-noble-chiseled` | 125 MB | ❌ none | ❌ | Max security, health checked from outside |
 
-Self-contained / Native AOT → `runtime-deps` base, even smaller (Phase 9).
+Self-contained / Native AOT → `runtime-deps` base, even smaller ([31](../07-dotnet-vps/31-dotnet-dockerfile.md)).
 
 ## Useful Tricks
 ```bash
@@ -61,4 +61,4 @@ docker build --target runtime -t hello:good .  # default = last stage
 ❌ `FROM sdk` as final stage → ✅ `FROM aspnet` (or `runtime-deps` for self-contained)
 
 ---
-← [07 Layers & Cache](07-layers-cache.md) · [Next → 09 .dockerignore](09-dockerignore.md)
+← [07 Layers & Build Cache](07-layers-cache.md) · [Next → 09 .dockerignore](09-dockerignore.md)

@@ -56,4 +56,4 @@ docker top web                   # same process, seen from Docker
 ❌ Build on Apple Silicon, run on an amd64 VPS → ✅ `exec format error`; build with `--platform linux/amd64`
 
 ---
-← [01 What is Docker](01-what-is-docker.md) · [Next → 03 Architecture](03-architecture.md)
+← [01 What is Docker](01-what-is-docker.md) · [Next → 03 Docker Architecture](03-architecture.md)

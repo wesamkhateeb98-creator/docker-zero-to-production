@@ -19,4 +19,4 @@ flowchart LR
 **Prerequisites:** basic terminal usage.
 
 ---
-[Next phase → 02 Images](../02-images/README.md)
+[Next phase → 2 Images](../02-images/README.md)

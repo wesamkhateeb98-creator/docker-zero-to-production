@@ -1,6 +1,6 @@
 # Example 02 — Notes API (.NET 10 + Postgres + Redis)
 
-> A small production-shaped API used by docs 18–53: Compose for dev, a hardened prod stack, CI, zero-downtime rollout, backups, and tests — all run locally.
+> A small production-shaped API used by docs 18–42: Compose for dev, a hardened prod stack, CI, zero-downtime rollout, backups, and tests — all run locally.
 
 ```mermaid
 flowchart LR
@@ -46,14 +46,13 @@ cd tests/Api.Tests && dotnet test      # Testcontainers: real postgres:17-alpine
 ## Files
 | File | Purpose | Doc |
 |---|---|---|
-| `Dockerfile` | `runtime` + `migrator` targets | [43](../../docs/09-dotnet-vps/43-dotnet-dockerfile.md) |
-| `compose.yml` | Dev: build, ports, healthchecks | [19](../../docs/05-compose/19-multi-service-app.md) |
-| `compose.prod.yml` | Prod: images by tag, secrets, limits, logs | [44](../../docs/09-dotnet-vps/44-compose-prod.md) |
-| `Caddyfile` | HTTPS + reverse proxy | [27](../../docs/07-deployment/27-reverse-proxy.md) |
-| `deploy.sh` / `rollout.sh` / `rollback.sh` | Deploy, zero-downtime, undo | [29](../../docs/07-deployment/29-zero-downtime.md), [47](../../docs/09-dotnet-vps/47-rollback.md) |
-| `backup.sh` | `pg_dump` + rotation | [32](../../docs/07-deployment/32-backups.md) |
-| `probe.sh` | Measures failed requests during deploys | [29](../../docs/07-deployment/29-zero-downtime.md) |
-| `.github/workflows/deploy.yml` | Build → scan → push → rollout | [35](../../docs/08-modern-tools/35-ghcr-actions.md), [46](../../docs/09-dotnet-vps/46-cicd.md) |
-| `.devcontainer/` | VS Code dev container | [40](../../docs/08-modern-tools/40-dev-test.md) |
-| `tests/Api.Tests` | Testcontainers integration test | [40](../../docs/08-modern-tools/40-dev-test.md) |
-| `secrets/README.md` | How to create the secret files | [26](../../docs/07-deployment/26-secrets.md) |
+| `Dockerfile` | `runtime` + `migrator` targets | [31](../../docs/07-dotnet-vps/31-dotnet-dockerfile.md) |
+| `compose.yml` | Dev: build, ports, healthchecks | [20](../../docs/05-compose/20-multi-service-app.md) |
+| `compose.prod.yml` | Prod: images by tag, secrets, limits, logs | [32](../../docs/07-dotnet-vps/32-compose-prod.md) |
+| `Caddyfile` | HTTPS + reverse proxy | [27](../../docs/06-modern-tools/27-caddy.md) |
+| `deploy.sh` / `rollout.sh` / `rollback.sh` | Deploy, zero-downtime, undo | [35](../../docs/07-dotnet-vps/35-zero-downtime.md), [36](../../docs/07-dotnet-vps/36-rollback.md) |
+| `backup.sh` | `pg_dump` + rotation | [40](../../docs/08-anti-patterns/40-data.md) |
+| `probe.sh` | Measures failed requests during deploys | [35](../../docs/07-dotnet-vps/35-zero-downtime.md) |
+| `.github/workflows/deploy.yml` | Build → scan → push → rollout | [26](../../docs/06-modern-tools/26-github-actions-ghcr.md), [34](../../docs/07-dotnet-vps/34-cicd.md) |
+| `tests/Api.Tests` | Testcontainers integration test | [29](../../docs/06-modern-tools/29-testcontainers.md) |
+| `secrets/README.md` | How to create the secret files | [32](../../docs/07-dotnet-vps/32-compose-prod.md) |

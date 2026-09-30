@@ -59,4 +59,4 @@ docker build --progress=plain . 2>&1 | grep "transferring context"
 ❌ Relying on `.gitignore` → ✅ Docker never reads `.gitignore`; only `.dockerignore`
 
 ---
-← [08 Multi-stage](08-multi-stage.md) · [Next phase → 03 Containers](../03-containers/README.md)
+← [08 Multi-stage Builds](08-multi-stage.md) · [Next → 10 Container Lifecycle](../03-containers/10-lifecycle.md)
